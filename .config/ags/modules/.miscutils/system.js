@@ -29,6 +29,7 @@ export const getDistroIcon = () => {
     if(distroID == 'nixos') return 'nixos-symbolic';
     // Cool thing
     if(distroID == 'fedora') return 'fedora-symbolic';
+    if(distroID == 'axos') return 'axos-symbolic';
     // Debians
     if(distroID == 'linuxmint') return 'ubuntu-symbolic';
     if(distroID == 'ubuntu') return 'ubuntu-symbolic';
@@ -37,6 +38,7 @@ export const getDistroIcon = () => {
     if(distroID == 'popos') return 'ubuntu-symbolic';
     if(distroID == 'raspbian') return 'debian-symbolic';
     if(distroID == 'kali') return 'debian-symbolic';
+
     return 'linux-symbolic';
 }
 
@@ -49,13 +51,15 @@ export const getDistroName = () => {
     if(distroID == 'nixos') return 'NixOS';
     // Cool thing
     if(distroID == 'fedora') return 'Fedora';
+    if(distroID == 'axos') return 'AxOS';
     // Debians
     if(distroID == 'linuxmint') return 'Linux Mint';
     if(distroID == 'ubuntu') return 'Ubuntu';
     if(distroID == 'debian') return 'Debian';
     if(distroID == 'zorin') return 'Zorin';
-    if(distroID == 'popos') return 'Pop!_OS';
+    if(distroID == 'popos') return 'Pop!_OS';4
     if(distroID == 'raspbian') return 'Raspbian';
     if(distroID == 'kali') return 'Kali Linux';
+
     return 'Linux';
 }

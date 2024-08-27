@@ -30,3 +30,4 @@ globalThis['handleStyles'] = (resetMusic) => {
     }
     applyStyle().catch(print);
 }
+
