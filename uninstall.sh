@@ -9,7 +9,7 @@ function v() {
 }
 
 printf 'Hi there!\n'
-printf 'This script 1. will uninstall [end-4/dots-hyprland > illogical-impulse] dotfiles\n'
+printf 'This script 1. will uninstall [levraiardox/dots-hyprland] dotfiles\n'
 printf '            2. will try to revert *mostly everything* installed using install.sh, so it'\''s pretty destructive\n'
 printf '            3. has not been tested, use at your own risk.\n'
 printf '            4. will show all commands that it runs.\n'

@@ -197,7 +197,7 @@ if ! git pull; then
     
     mkdir -p ./cache
     temp_folder=$(mktemp -d -p ./cache)
-    git clone --branch "$current_branch" https://github.com/end-4/dots-hyprland/ --depth=1 "$temp_folder"
+    git clone --branch "$current_branch" https://github.com/levraiardox/dots-hyprland/ --depth=1 "$temp_folder"
     # Replace the existing dotfiles with the new ones
     for folder in "${folders[@]}"; do
         find "$temp_folder/$folder" -print0 | while IFS= read -r -d '' file; do
