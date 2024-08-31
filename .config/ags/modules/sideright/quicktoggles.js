@@ -224,6 +224,33 @@ export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make
     ...props,
 });
 
+export const ModuleDoNotDisturb = (props = {}) => Widget.Button({ // TODO: Make this works
+    attribute: {
+        enabled: false,
+    },
+    className: 'txt-small sidebar-iconbutton',
+    tooltipText: 'Do not disturb',
+    onClicked: (self) => {
+        self.attribute.enabled = !self.attribute.enabled;
+        self.toggleClassName('sidebar-button-active', self.attribute.enabled);
+        if (self.attribute.enabled) {
+            Utils.execAsync(['bash', '-c', `${App.configDir}/ags/scripts/dnd_toggle.sh`]).catch(console.error);
+        } else {
+            Utils.execAsync(['bash', '-c', `${App.configDir}/ags/scripts/dnd_toggle.sh`]).catch(console.error);
+        }
+    },
+    child: MaterialIcon('do_not_disturb_on_total_silence', 'norm'),
+    setup: (self) => {
+        setupCursorHover(self);
+        exec('pidof dnd.sh', (err, stdout) => {
+            self.attribute.enabled = !!stdout;
+            self.toggleClassName('sidebar-button-active', self.attribute.enabled);
+        });
+    },
+    ...props,
+});
+
+
 export const ModuleReloadIcon = (props = {}) => Widget.Button({
     ...props,
     className: 'txt-small sidebar-iconbutton',
