@@ -63,13 +63,6 @@ const resources = Box({
                         label.label = `${output}`
                     }).catch(print);
             }, { hpack: 'end' }),
-        ResourceValue('Swap', 'swap_horiz', 10000, `free | awk '/^Swap/ {if ($2 > 0) printf("%.2f\\n", ($3/$2) * 100); else print "0";}'`,
-            (label) => {
-                execAsync(['bash', '-c', `free -h | awk '/^Swap/ {if ($2 != "0") print $3 " / " $2; else print "No swap"}' | sed 's/Gi/Gib/g'`])
-                    .then((output) => {
-                        label.label = `${output}`
-                    }).catch(print);
-            }, { hpack: 'end' }),
         ResourceValue('Disk space', 'hard_drive_2', 3600000, `echo $(df --output=pcent / | tr -dc '0-9')`,
             (label) => {
                 execAsync(['bash', '-c', `df -h --output=avail / | awk 'NR==2{print $1}'`])
@@ -89,7 +82,7 @@ const distroAndVersion = Box({
                 Label({
                     className: 'bg-distro-txt',
                     xalign: 0,
-                    label: 'Hyping on ',
+                    label: 'Currently on ',
                 }),
                 Label({
                     className: 'bg-distro-name',
@@ -101,27 +94,19 @@ const distroAndVersion = Box({
                         }).catch(print);
                     },
                 }),
-            ]
-        }),
-        Box({
-            hpack: 'end',
-            children: [
                 Label({
                     className: 'bg-distro-txt',
                     xalign: 0,
-                    label: 'with ',
+                    label: ' ',
                 }),
                 Label({
-                    className: 'bg-distro-name',
+                    className: 'bg-distro-txt',
                     xalign: 0,
-                    label: 'An environment idk',
+                    label: '<distroversion>',
                     setup: (label) => {
-                        // hyprctl will return unsuccessfully if Hyprland isn't running
-                        execAsync([`bash`, `-c`, `hyprctl version | grep -oP "Tag: v\\K\\d+\\.\\d+\\.\\d+"`]).then(version => {
-                            label.label = `Hyprland ${version}`;
-                        }).catch(() => execAsync([`bash`, `-c`, `sway -v | cut -d'-' -f1 | sed 's/sway version /v/'`]).then(version => {
-                            label.label = `Sway ${version}`;
-                        }).catch(print));
+                        execAsync([`grep`, `-oP`, `VERSION=\\K[^"]+`, `/etc/os-release`]).then(distro => {
+                            label.label = distro; // Set the output directly to the label
+                        }).catch(print);
                     },
                 }),
             ]
