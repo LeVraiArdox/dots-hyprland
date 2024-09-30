@@ -5,7 +5,7 @@ const { execAsync, exec } = Utils;
 
 export const distroID = exec(`bash -c 'cat /etc/os-release | grep "^ID=" | cut -d "=" -f 2 | sed "s/\\"//g"'`).trim();
 export const isDebianDistro = (distroID == 'linuxmint' || distroID == 'ubuntu' || distroID == 'debian' || distroID == 'zorin' || distroID == 'popos' || distroID == 'raspbian' || distroID == 'kali');
-export const isArchDistro = (distroID == 'arch' || distroID == 'endeavouros' || distroID == 'cachyos');
+export const isArchDistro = (distroID == 'arch' || distroID == 'endeavouros' || distroID == 'cachyos' || distroID == 'axos');
 export const hasFlatpak = !!exec(`bash -c 'command -v flatpak'`);
 
 const LIGHTDARK_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/colormode.txt`;
@@ -28,9 +28,9 @@ export const getDistroIcon = () => {
     // Funny flake
     if(distroID == 'nixos') return 'nixos-symbolic';
     // Cool thing
-    if(distroID == 'fedora') return 'fedora-symbolic';
     if(distroID == 'axos') return 'axos-symbolic';
     // Debians
+    if(distroID == 'fedora') return 'fedora-symbolic';
     if(distroID == 'linuxmint') return 'ubuntu-symbolic';
     if(distroID == 'ubuntu') return 'ubuntu-symbolic';
     if(distroID == 'debian') return 'debian-symbolic';

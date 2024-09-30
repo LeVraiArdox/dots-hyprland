@@ -10,6 +10,11 @@ import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 
 import { distroID, isArchDistro, isDebianDistro, hasFlatpak } from '../../.miscutils/system.js';
 
+const axosOrArchIcon = () => {
+    if(distroID == "axos") return 'axos-symbolic'
+    else return 'arch-symbolic'
+}
+
 const scripts = [
     {
     	icon: 'desktop-symbolic',
@@ -42,13 +47,13 @@ const scripts = [
         enabled: distroID == 'fedora',
     },
     {
-        icon: 'arch-symbolic',
+        icon: axosOrArchIcon(),
         name: 'Update packages',
         command: `sudo pacman -Syyu`,
         enabled: isArchDistro,
     },
     {
-        icon: 'arch-symbolic',
+        icon: axosOrArchIcon(),
         name: 'Remove orphan packages',
         command: `sudo pacman -R $(pacman -Qdtq)`,
         enabled: isArchDistro,

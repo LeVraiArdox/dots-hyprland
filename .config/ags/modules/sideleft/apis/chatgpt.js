@@ -136,7 +136,7 @@ const GPTInfo = () => {
                     Button({
                         className: 'txt-subtext txt-norm icon-material',
                         label: 'info',
-                        tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.\n\nPrivacy: OpenAI claims they do not use your data\nwhen you use their API. Idk about others.',
+                        tooltipText: 'Not affiliated, endorsed, or sponsored by any supported providers.\n\nPrivacy: OpenAI claims they do not use your data\nwhen you use their API. Idk about others.',
                         setup: setupCursorHoverInfo,
                     }),
                 ]
