@@ -182,7 +182,9 @@ export default () => {
           label.label = `${trimTrackTitle(
             mpris.trackTitle
           )} • ${mpris.trackArtists.join(", ")}`;
-        else label.label = "No media";
+        else {
+          label.label = "No media";
+        }
       }),
   });
   const isVisible = () => {
@@ -196,6 +198,7 @@ export default () => {
     hexpand: true,
     children: [playingState, trackTitle],
   });
+  
 
   const SystemResourcesOrCustomModule = () => {
     // Check if $XDG_CACHE_HOME/ags/user/scripts/custom-module-poll.sh exists
@@ -303,5 +306,5 @@ export default () => {
       ],
     }),
   });
-  
 };
+
