@@ -52,19 +52,9 @@
     <h3></h3>
 </div>
 
-### Main branch (*illogical-impulse*)
+![1](https://github.com/user-attachments/assets/ab046db6-e4a9-47bb-82a5-5349473ecaa4)
+![2](https://github.com/user-attachments/assets/6587fd26-94ab-46e6-bd1e-c3caf1478918)
 
-**AI, on-screen indicators**
-![image](https://github.com/end-4/dots-hyprland/assets/97237370/5e081770-0f1e-45c4-ad9c-3d19f488cd85)
-
-**Fancy notifications, music controls, system, calendar**
-![image](https://github.com/end-4/dots-hyprland/assets/97237370/406b72b6-fa38-4f0d-a6c4-4d7d5d5ddcb7)
-<!-- ![image](https://github.com/end-4/dots-hyprland/assets/97237370/90c13b64-cde3-4363-9716-718d35845d95) -->
-<!-- ![image](https://github.com/end-4/dots-hyprland/assets/97237370/9e7adedd-fae8-4cc8-9c81-d7ad489d7559) -->
-
-**Easy window management**
-<!--! ![image](https://github.com/end-4/dots-hyprland/assets/97237370/354431f6-8939-487f-9292-0bac71cf9ca8) -->
-![image](https://github.com/end-4/dots-hyprland/assets/97237370/14e9725c-789f-4412-87b6-cce9504db109)
 
 <div align="center">
     <h2>• thank you •</h2>
