@@ -57,7 +57,7 @@
 
 
 <div align="center">
-    <h2>• thank you •</h2>
+    <h2>• Thank you •</h2>
     <h3></h3>
 </div>
 
