@@ -114,7 +114,15 @@ export default (monitor = 0) => {
     const indicatorArea = SpaceRightDefaultClicks(Widget.Box({
         children: [
             SeparatorDot(),
-            BarBattery(),
+            Revealer({
+                transitionDuration: userOptions.animations.durationSmall,
+                revealChild: false,
+                transition: 'slide_right',
+                child: BarBattery(),
+                setup: (self) => self.hook(Battery, revealer => {
+                    self.revealChild = Battery.available;
+                }),
+            }),
             barStatusIcons
         ],
     }));

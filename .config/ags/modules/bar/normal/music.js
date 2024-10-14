@@ -237,7 +237,7 @@ export default () => {
           children: [
             BarResource(
               "RAM Usage",
-              "memory",
+              "memory_alt",
               `LANG=C free | awk '/^Mem/ {printf("%.2f\\n", ($3/$2) * 100)}'`,
               "bar-ram-circprog",
               "bar-ram-txt",
@@ -252,12 +252,37 @@ export default () => {
                 children: [
                   BarResource(
                     "CPU Usage",
-                    "settings_motion_mode",
-                    `LANG=C top -bn1 | grep Cpu | sed 's/\\,/\\./g' | awk '{print $2}'`,
+                    "developer_board",
+                    `LANG=C top -bn1 | awk '/^%Cpu/ {printf("%.2f\\n", 100 - $8)}'`,
                     "bar-cpu-circprog",
                     "bar-cpu-txt",
                     "bar-cpu-icon"
                   ),
+                  
+                ],
+              }),
+              setup: (self) =>
+                self.hook(Mpris, (label) => {
+                  const mpris = Mpris.getPlayer("");
+                  self.revealChild = !mpris;
+                }),
+            }),
+            Revealer({
+              revealChild: true,
+              transition: "slide_left",
+              transitionDuration: userOptions.animations.durationLarge,
+              child: Box({
+                className: "spacing-h-10 margin-left-10",
+                children: [
+                  BarResource(
+                    "CPU Temp",
+                    "device_thermostat",
+                    `LANG=C sensors | awk '/^Package id 0/ {printf("%.2f\\n", $4)}'`,
+                    "bar-cpu-circprog",
+                    "bar-cpu-txt",
+                    "bar-cpu-icon"
+                  ),
+                  
                 ],
               }),
               setup: (self) =>
@@ -274,7 +299,7 @@ export default () => {
     onScrollUp: (self) => switchToRelativeWorkspace(self, -1),
     onScrollDown: (self) => switchToRelativeWorkspace(self, +1),
     child: Box({
-      className: "spacing-h-4",
+      //className: "spacing-h-4",
       children: [
         SystemResourcesOrCustomModule(),
         EventBox({

@@ -176,7 +176,6 @@ export default () => Widget.EventBox({
     onScrollDown: (self) => switchToRelativeWorkspace(self, +1),
     onPrimaryClick: () => App.toggleWindow('sideright'),
     child: Widget.Box({
-        className: 'spacing-h-4',
         children: [
             BarGroup({ child: BarClock() }),
             WeatherModule(),
