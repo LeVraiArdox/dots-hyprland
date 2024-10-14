@@ -52,8 +52,17 @@
     <h3></h3>
 </div>
 
-![1](https://github.com/user-attachments/assets/ab046db6-e4a9-47bb-82a5-5349473ecaa4)
-![2](https://github.com/user-attachments/assets/6587fd26-94ab-46e6-bd1e-c3caf1478918)
+![1](https://github.com/user-attachments/assets/980d059d-5584-4527-831f-654d5ebe7e2e)
+
+- Side pannel with quick toggles, notifications, wifi and bluetooth applets, quick settings, sound settings, calendar and todo list.
+
+![2](https://github.com/user-attachments/assets/f2a5a5f6-1f9a-4fad-93f1-5984425b5fc8)
+
+- Music applet
+
+![3](https://github.com/user-attachments/assets/52724714-c40f-41aa-bd65-4125c8191d44)
+
+- Gemini/ChatGPT integration, quick scripts and tools.
 
 
 <div align="center">
