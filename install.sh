@@ -81,7 +81,7 @@ if (( ${#pkglist[@]} != 0 )); then
 	fi
 fi
 
-# Convert old dependencies to non explicit dependencies so that they can be orphaned if not in meta packages
+# Convert old dependencies to non explicit dependencies so that they can be orphaned if not in meta packages 
 set-explicit-to-implicit() {
 	remove_bashcomments_emptylines ./scriptdata/previous_dependencies.conf ./cache/old_deps_stripped.conf
 	readarray -t old_deps_list < ./cache/old_deps_stripped.conf
