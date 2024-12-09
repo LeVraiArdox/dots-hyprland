@@ -90,6 +90,60 @@ const BarResource = (
   return widget;
 };
 
+
+const BarResourceTemp = (
+  name,
+  icon,
+  command,
+  circprogClassName = "bar-batt-circprog",
+  textClassName = "txt-onSurfaceVariant",
+  iconClassName = "bar-batt"
+) => {
+  const resourceCircProg = AnimatedCircProg({
+    className: `${circprogClassName}`,
+    vpack: "center",
+    hpack: "center",
+  });
+  const resourceProgress = Box({
+    homogeneous: true,
+    children: [
+      Overlay({
+        child: Box({
+          vpack: "center",
+          className: `${iconClassName}`,
+          homogeneous: true,
+          children: [MaterialIcon(icon, "small")],
+        }),
+        overlays: [resourceCircProg],
+      }),
+    ],
+  });
+  const resourceLabel = Label({
+    className: `txt-smallie ${textClassName}`,
+  });
+  const widget = Button({
+    onClicked: () =>
+      Utils.execAsync(["bash", "-c", `${userOptions.apps.taskManager}`]).catch(
+        print
+      ),
+    child: Box({
+      className: `spacing-h-4 ${textClassName}`,
+      children: [resourceProgress, resourceLabel],
+      setup: (self) =>
+        self.poll(5000, () =>
+          execAsync(["bash", "-c", command])
+            .then((output) => {
+              resourceCircProg.css = `font-size: ${Number(output)}px;`;
+              resourceLabel.label = `${Math.round(Number(output))}°C`;
+              widget.tooltipText = `${name}: ${Math.round(Number(output))}%`;
+            })
+            .catch(print)
+        ),
+    }),
+  });
+  return widget;
+};
+
 const TrackProgress = () => {
   const _updateProgress = (circprog) => {
     const mpris = Mpris.getPlayer("");
@@ -274,7 +328,7 @@ export default () => {
               child: Box({
                 className: "spacing-h-10 margin-left-10",
                 children: [
-                  BarResource(
+                  BarResourceTemp(
                     "CPU Temp",
                     "device_thermostat",
                     `LANG=C sensors | awk '/^Package id 0/ {printf("%.2f\\n", $4)}'`,
