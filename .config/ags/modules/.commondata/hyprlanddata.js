@@ -1,6 +1,6 @@
 const { Gdk } = imports.gi;
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
+const { exec } = Utils;
 
 export let monitors;
 

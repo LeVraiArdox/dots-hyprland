@@ -1,16 +1,12 @@
 // TODO: Make selection update when entry changes
-const { Gtk } = imports.gi;
-import App from 'resource:///com/github/Aylur/ags/app.js';
-import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
-const { Box, Button, Entry, EventBox, Icon, Label, Overlay, Scrollable } = Widget;
+const { Box, Button, Entry, EventBox, Label, Overlay } = Widget;
 import SidebarModule from './module.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 
-import { ColorPickerSelection, hslToHex, hslToRgbValues, hexToHSL } from './color.js';
+import { ColorPickerSelection, hslToHex, hslToRgbValues } from './color.js';
 import { clamp } from '../../.miscutils/mathfuncs.js';
 
 export default () => {

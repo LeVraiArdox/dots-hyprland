@@ -1,11 +1,10 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Network from "resource:///com/github/Aylur/ags/service/network.js";
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, Entry, Icon, Label, Revealer, Scrollable, Slider, Stack, Overlay } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Entry, Label, Revealer, Scrollable, Overlay } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
-import { ConfigToggle } from '../../.commonwidgets/configwidgets.js';
 
 const MATERIAL_SYMBOL_SIGNAL_STRENGTH = {
     'network-wireless-signal-excellent-symbolic': "signal_wifi_4_bar",

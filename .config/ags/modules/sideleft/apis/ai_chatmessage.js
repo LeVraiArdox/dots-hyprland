@@ -1,10 +1,10 @@
-const { Gdk, Gio, GLib, Gtk } = imports.gi;
+const { Gio, GLib, Gtk } = imports.gi;
 import GtkSource from "gi://GtkSource?version=3.0";
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, Label, Icon, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Label, Scrollable, Stack } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import md2pango from '../../.miscutils/md2pango.js';
 import { darkMode } from "../../.miscutils/system.js";

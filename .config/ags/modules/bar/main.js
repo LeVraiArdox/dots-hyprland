@@ -4,10 +4,8 @@ import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 
 import WindowTitle from "./normal/spaceleft.js";
 import Indicators from "./normal/spaceright.js";
-import Music from "./normal/music.js";
+import Monitor from "./normal/monitor.js";
 import System from "./normal/system.js";
-import { enableClickthrough } from "../.widgetutils/clickthrough.js";
-import { RoundedCorner } from "../.commonwidgets/cairo_roundedcorner.js";
 import { currentShellMode } from '../../variables.js';
 
 const NormalOptionalWorkspaces = async () => {
@@ -36,7 +34,7 @@ const FocusOptionalWorkspaces = async () => {
 
 export const Bar = async (monitor = 0) => {
     const SideModule = (children) => Widget.Box({
-        className: 'bar-sidemodule',
+        className: 'bar-side',
         children: children,
     });
     const normalBarContent = Widget.CenterBox({
@@ -48,9 +46,9 @@ export const Bar = async (monitor = 0) => {
         },
         startWidget: (await WindowTitle(monitor)),
         centerWidget: Widget.Box({
-            className: 'bar-bg', // bar-bg
+            className: 'bar-center', // Center bar
             children: [
-                SideModule([Music()]),
+                SideModule([Monitor()]),
                 Widget.Box({
                     homogeneous: true,
                     children: [await NormalOptionalWorkspaces()],
@@ -87,6 +85,7 @@ export const Bar = async (monitor = 0) => {
     })
     return Widget.Window({
         monitor,
+        className: 'bar-bg', // Full bar
         name: `bar${monitor}`,
         anchor: ['top', 'left', 'right'],
         exclusivity: 'exclusive',
@@ -106,24 +105,3 @@ export const Bar = async (monitor = 0) => {
         }),
     });
 }
-
-export const BarCornerTopleft = (monitor = 0) => Widget.Window({
-    monitor,
-    name: `barcornertl${monitor}`,
-    layer: 'top',
-    anchor: ['top', 'left'],
-    exclusivity: 'normal',
-    visible: true,
-    child: RoundedCorner('topleft', { className: 'corner', }),
-    setup: enableClickthrough,
-});
-export const BarCornerTopright = (monitor = 0) => Widget.Window({
-    monitor,
-    name: `barcornertr${monitor}`,
-    layer: 'top',
-    anchor: ['top', 'right'],
-    exclusivity: 'normal',
-    visible: true,
-    child: RoundedCorner('topright', { className: 'corner', }),
-    setup: enableClickthrough,
-});

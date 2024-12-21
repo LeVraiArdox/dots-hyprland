@@ -1,6 +1,6 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import SystemTray from 'resource:///com/github/Aylur/ags/service/systemtray.js';
-const { Box, Icon, Button, Revealer } = Widget;
+const { Box, Icon, Button } = Widget;
 const { Gravity } = imports.gi.Gdk;
 
 const SysTrayItem = (item) => item.id !== null ? Button({

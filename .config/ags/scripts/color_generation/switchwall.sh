@@ -24,15 +24,25 @@ switch() {
 		--transition-pos "$cursorposx, $cursorposy_inverted"
 }
 
-if [ "$1" == "--noswitch" ]; then
+imgpath=""
+
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+		--noswitch) noswitch=true ;;
+		--path) imgpath="$2"; shift ;;
+		*) imgpath="$1" ;;
+	esac
+	shift
+done
+
+if [ "$noswitch" == true ]; then
 	imgpath=$(swww query | awk -F 'image: ' '{print $2}')
 	# imgpath=$(ags run-js 'wallpaper.get(0)')
-elif [[ "$1" ]]; then
-	switch "$1"
+elif [[ "$imgpath" ]]; then
+	switch "$imgpath"
 else
 	# Select and set image (hyprland)
-
-    cd "$(xdg-user-dir PICTURES)" || return 1
+	cd "$(xdg-user-dir PICTURES)" || return 1
 	switch "$(yad --width 1200 --height 800 --file --add-preview --large-preview --title='Choose wallpaper')"
 fi
 

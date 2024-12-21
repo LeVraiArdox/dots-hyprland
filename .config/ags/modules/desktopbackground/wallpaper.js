@@ -1,9 +1,7 @@
-const { Gdk, GdkPixbuf, Gio, GLib, Gtk } = imports.gi;
+const { Gdk, GdkPixbuf, Gtk } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { exec, execAsync } = Utils;
 const { Box, Button, Label, Stack } = Widget;
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 
 import Wallpaper from '../../services/wallpaper.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';

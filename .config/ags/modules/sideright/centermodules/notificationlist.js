@@ -7,7 +7,6 @@ const { Box, Button, Label, Revealer, Scrollable, Stack } = Widget;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 import Notification from '../../.commonwidgets/notification.js';
-import { ConfigToggle } from '../../.commonwidgets/configwidgets.js';
 
 export default (props) => {
     const notifEmptyContent = Box({

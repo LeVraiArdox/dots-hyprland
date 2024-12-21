@@ -1,8 +1,8 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Bluetooth from 'resource:///com/github/Aylur/ags/service/bluetooth.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, Icon, Label, Scrollable, Slider, Stack, Overlay } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Icon, Label, Scrollable, Stack, Overlay } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 import { ConfigToggle } from '../../.commonwidgets/configwidgets.js';

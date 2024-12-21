@@ -1,8 +1,5 @@
-const { GLib, Gdk, Gtk } = imports.gi;
+const { Gdk, Gtk } = imports.gi;
 const Lang = imports.lang;
-const Cairo = imports.cairo;
-const Pango = imports.gi.Pango;
-const PangoCairo = imports.gi.PangoCairo;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
@@ -172,7 +169,6 @@ const WorkspaceContents = (count = 10) => {
 export default () => EventBox({
     onScrollUp: () => Hyprland.messageAsync(`dispatch workspace -1`).catch(print),
     onScrollDown: () => Hyprland.messageAsync(`dispatch workspace +1`).catch(print),
-    onMiddleClick: () => toggleWindowOnAllMonitors('osk'),
     onSecondaryClick: () => App.toggleWindow('overview'),
     attribute: {
         clicked: false,

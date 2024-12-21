@@ -1,20 +1,15 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { execAsync, exec } = Utils;
+const { execAsync } = Utils;
 const { Box, EventBox } = Widget;
 import {
     ToggleIconBluetooth,
     ToggleIconWifi,
-    HyprToggleIcon,
     ModuleNightLight,
-    ModuleInvertColors,
     ModuleIdleInhibitor,
     ModuleReloadIcon,
-    ModuleSettingsIcon,
     ModulePowerIcon,
-    ModuleRawInput,
     ModuleCloudflareWarp,
-    ModuleDoNotDisturb
 } from "./quicktoggles.js";
 import ModuleNotificationList from "./centermodules/notificationlist.js";
 import ModuleAudioControls from "./centermodules/audiocontrols.js";
@@ -23,7 +18,6 @@ import ModuleBluetooth from "./centermodules/bluetooth.js";
 import ModuleConfigure from "./centermodules/configure.js";
 import { ModuleCalendar } from "./calendar.js";
 import { getDistroIcon } from '../.miscutils/system.js';
-import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { ExpandingIconTabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
 

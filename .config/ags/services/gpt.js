@@ -26,13 +26,13 @@ const PROVIDERS = Object.assign({ // There's this list hmm https://github.com/zu
         'model': 'llama3:instruct',
     },
     'openrouter': {
-        'name': 'OpenRouter (Mistral-7b)',
+        'name': 'OpenRouter (Llama3.2)',
         'logo_name': 'openrouter-symbolic',
         'description': 'A unified interface for LLMs',
         'base_url': 'https://openrouter.ai/api/v1/chat/completions',
         'key_get_url': 'https://openrouter.ai/keys',
         'key_file': 'openrouter_key.txt',
-        'model': 'mistralai/mistral-7b-instruct:free',
+        'model': 'meta-llama/llama-3.2-3b-instruct:free',
     },
     'oxygen4o': {
         'name': 'Oxygen (GPT-4o)',

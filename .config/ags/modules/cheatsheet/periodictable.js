@@ -1,6 +1,6 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { niceTypes, periodicTable, series } from "./data_periodictable.js";
-const { Box, Button, Icon, Label, Revealer } = Widget;
+const { Box, Icon, Label } = Widget;
 
 export default () => {
     const ElementTile = (element) => {

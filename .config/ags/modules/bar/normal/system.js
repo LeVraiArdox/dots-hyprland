@@ -6,7 +6,7 @@ const { execAsync } = Utils;
 const { GLib } = imports.gi;
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
-import { WWO_CODE, WEATHER_SYMBOL, NIGHT_WEATHER_SYMBOL } from '../../.commondata/weather.js';
+import { WWO_CODE, WEATHER_SYMBOL } from '../../.commondata/weather.js';
 
 const WEATHER_CACHE_FOLDER = `${GLib.get_user_cache_dir()}/ags/weather`;
 Utils.exec(`mkdir -p ${WEATHER_CACHE_FOLDER}`);
@@ -66,11 +66,6 @@ const Utilities = () => Box({
         UtilButton({
             name: 'Color picker', icon: 'colorize', onClicked: () => {
                 Utils.execAsync(['hyprpicker', '-a']).catch(print)
-            }
-        }),
-        UtilButton({
-            name: 'Toggle on-screen keyboard', icon: 'keyboard', onClicked: () => {
-                toggleWindowOnAllMonitors('osk');
             }
         }),
     ]
@@ -178,7 +173,7 @@ export default () => Widget.EventBox({
     child: Widget.Box({
         children: [
             BarGroup({ child: BarClock() }),
-            WeatherModule(),
+            //WeatherModule(),
         ]
     })
 });

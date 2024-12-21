@@ -6,9 +6,9 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-right {
     @include menu_decel;
-    @include elevation-border;
-    @include elevation2;
-    border-radius: $rounding_large - $elevation_margin + 0.068rem;
+    //@include elevation-border;
+    //@include elevation2;
+    //border-radius: $rounding_large - $elevation_margin + 0.068rem;
     min-width: 27.818rem;
     background-color: $background;
     padding: 1.023rem;
@@ -16,9 +16,9 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 
 .sidebar-left {
     @include menu_decel;
-    @include elevation-border;
-    @include elevation2;
-    border-radius: $rounding_large - $elevation_margin + 0.068rem;
+    //@include elevation-border;
+    //@include elevation2;
+    //border-radius: $rounding_large - $elevation_margin + 0.068rem;
     min-width: 27.818rem;
     background-color: $background;
     padding: 1.023rem;
@@ -69,6 +69,23 @@ $sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
 .sidebar-button-active {
     background-color: $primary;
     color: $onPrimary;
+}
+
+.timer-button {
+    @include element_decel;
+    background-color: $primary;
+    color: $onPrimary;
+}
+.timer-button:hover,
+.timer-button:focus {
+    background-color: mix($primary, $hovercolor, 70%);
+}
+.timer-button-group {
+    margin-top: 3rem;
+    background-color: $layer1;
+}
+.timer-label {
+    font-size: 4rem;    
 }
 
 .sidebar-button-active:hover,
@@ -913,4 +930,9 @@ $skeleton-accent: mix($secondary, $onSecondary, 50%);
 
 .sidebar-centermodules-scrollgradient-bottom {
     background: linear-gradient(to top, $layer1 0%, transparentize($layer1, 1) 1.023rem);
+}
+
+.txt-quote {
+    font-size: large;
+    padding: 0.341rem;
 }

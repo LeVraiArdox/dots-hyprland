@@ -1,11 +1,8 @@
 const { GLib } = imports.gi;
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, Icon, Label, Scrollable, Slider, Stack } = Widget;
+const { Box, Label, Scrollable } = Widget;
 const { execAsync, exec } = Utils;
-import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
-import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 import { ConfigGap, ConfigSpinButton, ConfigToggle } from '../../.commonwidgets/configwidgets.js';
 
 const HyprlandToggle = ({ icon, name, desc = null, option, enableValue = 1, disableValue = 0, extraOnChange = () => { } }) => ConfigToggle({

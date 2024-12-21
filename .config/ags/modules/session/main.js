@@ -1,4 +1,3 @@
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import SessionScreen from "./sessionscreen.js";
 import PopupWindow from '../.widgethacks/popupwindow.js';
 

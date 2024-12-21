@@ -1,41 +1,19 @@
-const { Gdk, Gtk } = imports.gi;
+const { Gdk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
-const { execAsync, exec } = Utils;
-import { execAndClose, expandTilde, hasUnterminatedBackslash, couldBeMath, launchCustomCommand, ls } from './miscfunctions.js';
+const { exec } = Utils;
+import { hasUnterminatedBackslash, couldBeMath, ls } from './miscfunctions.js';
 import {
     CalculationResultButton, CustomCommandButton, DirectoryButton,
     DesktopEntryButton, ExecuteCommandButton, SearchButton, AiButton, NoResultButton,
 } from './searchbuttons.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
-import GeminiService from '../../services/gemini.js';
 
 // Add math funcs
-const { abs, sin, cos, tan, cot, asin, acos, atan, acot } = Math;
-const pi = Math.PI;
-// trigonometric funcs for deg
-const sind = x => sin(x * pi / 180);
-const cosd = x => cos(x * pi / 180);
-const tand = x => tan(x * pi / 180);
-const cotd = x => cot(x * pi / 180);
-const asind = x => asin(x) * 180 / pi;
-const acosd = x => acos(x) * 180 / pi;
-const atand = x => atan(x) * 180 / pi;
-const acotd = x => acot(x) * 180 / pi;
-
 const MAX_RESULTS = 10;
-const OVERVIEW_SCALE = 0.18; // = overview workspace box / screen size
-const OVERVIEW_WS_NUM_SCALE = 0.09;
-const OVERVIEW_WS_NUM_MARGIN_SCALE = 0.07;
-const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)];
-
-function iconExists(iconName) {
-    let iconTheme = Gtk.IconTheme.get_default();
-    return iconTheme.has_icon(iconName);
-}
 
 const OptionalOverview = async () => {
     try {

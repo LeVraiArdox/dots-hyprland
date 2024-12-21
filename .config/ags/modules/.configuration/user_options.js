@@ -1,4 +1,3 @@
-import GLib from "gi://GLib";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import userOverrides from "../../user_options.js";
 
@@ -7,7 +6,7 @@ import userOverrides from "../../user_options.js";
 let configOptions = {
   // General stuff
   ai: {
-    defaultGPTProvider: "openai",
+    defaultGPTProvider: "openrouter",
     defaultTemperature: 0.9,
     enhancements: true,
     useHistory: true,
@@ -30,8 +29,6 @@ let configOptions = {
     keyboardUseFlag: false, // Use flag emoji instead of abbreviation letters
     layerSmoke: false,
     layerSmokeStrength: 0.2,
-    barRoundCorners: 1, // 0: No, 1: Yes
-    fakeScreenRounding: 1, // 0: None | 1: Always | 2: When not fullscreen
   },
   apps: {
     bluetooth: "blueberry",
@@ -68,20 +65,11 @@ let configOptions = {
       configPath: "", // Path to hyprland keybind config file. Leave empty for default (~/.config/hypr/hyprland/keybinds.conf)
     },
   },
-  gaming: {
-    crosshair: {
-      size: 20,
-      color: "rgba(113,227,32,0.9)",
-    },
-  },
   monitors: {
     scaleMethod: "division", // Either "division" [default] or "gdk"
   },
   music: {
-    preferredPlayer: "plasma-browser-integration",
-  },
-  onScreenKeyboard: {
-    layout: "qwerty_full", // See modules/onscreenkeyboard/onscreenkeyboard.js for available layouts
+    preferredPlayer: "spotify",
   },
   overview: {
     scale: 0.18, // Relative to screen size
@@ -92,18 +80,7 @@ let configOptions = {
   },
   sidebar: {
     ai: {
-      extraGptModels: {
-        oxygen3: {
-          name: "Oxygen (GPT-3.5)",
-          logo_name: "ai-oxygen-symbolic",
-          description:
-            "An API from Tornado Softwares\nPricing: Free: 100/day\nRequires you to join their Discord for a key",
-          base_url: "https://app.oxyapi.uk/v1/chat/completions",
-          key_get_url: "https://discord.com/invite/kM6MaCqGKA",
-          key_file: "oxygen_key.txt",
-          model: "gpt-3.5-turbo",
-        },
-      },
+      extraGptModels: {},
     },
     image: {
       columns: 2,
@@ -114,7 +91,7 @@ let configOptions = {
     pages: {
       order: ["apis", "tools"],
       apis: {
-        order: ["gemini", "gpt"],
+        order: ["gpt", "gemini"],
       },
     },
   },
@@ -136,8 +113,8 @@ let configOptions = {
     // For seconds, add "%S" and set interval to 1000
     format: "%H:%M",
     interval: 5000,
-    dateFormatLong: "%A, %d/%m", // On bar
-    dateInterval: 5000,
+    dateFormatLong: "%A %d/%m", // On bar
+    dateInterval: 10000,
     dateFormat: "%d/%m", // On notif time
   },
   weather: {
@@ -146,26 +123,6 @@ let configOptions = {
   },
   workspaces: {
     shown: 10,
-  },
-  dock: {
-    enabled: false,
-    hiddenThickness: 5,
-    pinnedApps: [],
-    layer: "top",
-    monitorExclusivity: true, // Dock will move to other monitor along with focus if enabled
-    searchPinnedAppIcons: false, // Try to search for the correct icon if the app class isn't an icon name
-    trigger: ["client-added", "client-removed"], // client_added, client_move, workspace_active, client_active
-    // Automatically hide dock after `interval` ms since trigger
-    autoHide: [
-      {
-        trigger: "client-added",
-        interval: 500,
-      },
-      {
-        trigger: "client-removed",
-        interval: 500,
-      },
-    ],
   },
   // Longer stuff
   icons: {

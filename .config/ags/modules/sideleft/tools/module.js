@@ -1,7 +1,7 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
 import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
-const { Box, Button, Icon, Label, Revealer } = Widget;
+const { Box, Button, Label, Revealer } = Widget;
 
 export default ({
     icon,

@@ -6,6 +6,7 @@ import PeriodicTable from "./periodictable.js";
 import { ExpandingIconTabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
 import clickCloseRegion from '../.commonwidgets/clickcloseregion.js';
+//import GlobalInfo from './globalinfo.js';
 
 const cheatsheets = [
     {
@@ -18,6 +19,11 @@ const cheatsheets = [
         materialIcon: 'experiment',
         contentWidget: PeriodicTable,
     },
+    //{
+    //    name: 'Global info',
+    //    materialIcon: 'info',
+    //    contentWidget: GlobalInfo,
+    //}
 ];
 
 const CheatsheetHeader = () => Widget.CenterBox({

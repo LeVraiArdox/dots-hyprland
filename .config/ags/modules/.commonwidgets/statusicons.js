@@ -35,6 +35,7 @@ export const MicMuteIndicator = () => Widget.Revealer({
     child: MaterialIcon('mic_off', 'norm'),
 });
 
+
 export const NotificationIndicator = (notifCenterName = 'sideright') => {
     const widget = Widget.Revealer({
         transition: 'slide_left',
@@ -180,6 +181,36 @@ const NetworkWifiIndicator = () => Widget.Stack({
     }),
 });
 
+
+export const AudioWidget = () => Widget.Stack({
+    transition: 'slide_up_down',
+    transitionDuration: userOptions.animations.durationSmall,
+    children: {
+        'fallback': Widget.Label({ className: 'txt-norm icon-material', label: 'no_sound' }),
+        'mute': Widget.Label({ className: 'txt-norm icon-material', label: 'volume_off' }),
+        '0': Widget.Label({ className: 'txt-norm icon-material', label: 'volume_off' }),
+        '1': Widget.Label({ className: 'txt-norm icon-material', label: 'volume_down' }),
+        '2': Widget.Label({ className: 'txt-norm icon-material', label: 'volume_up' }),
+    },
+    setup: (self) => self.hook(Audio, (stack) => {
+        let value = Math.round(Audio.speaker?.volume * 100);
+        console.log(`Volume: ${value}`);
+        if (value === undefined || value === null) {
+            stack.shown = 'fallback';
+            return;
+        } else if (value === 0 || Audio.speaker?.stream?.isMuted) {
+            stack.shown = 'mute';
+            return;
+        } else {
+            if (value > 1 && value < 50) {
+                stack.shown = '1';
+            } else if (value >= 50) {
+                stack.shown = '2';
+            }
+        }
+    }),
+});
+
 export const NetworkIndicator = () => Widget.Stack({
     transition: 'slide_up_down',
     transitionDuration: userOptions.animations.durationSmall,
@@ -297,6 +328,7 @@ export const StatusIcons = (props = {}, monitor = 0) => Widget.Box({
             optionalKeyboardLayoutInstances[monitor],
             NotificationIndicator(),
             NetworkIndicator(),
+            AudioWidget(),
             Widget.Box({
                 className: 'spacing-h-5',
                 children: [BluetoothIndicator(), BluetoothDevices()]

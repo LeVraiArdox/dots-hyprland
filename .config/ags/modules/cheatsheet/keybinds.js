@@ -1,9 +1,9 @@
-const { GLib, Gtk } = imports.gi;
+const { GLib } = imports.gi;
 import App from "resource:///com/github/Aylur/ags/app.js";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import { IconTabContainer } from "../.commonwidgets/tabcontainer.js";
-const { Box, Label, Scrollable } = Widget;
+const { Box, Label } = Widget;
 
 const HYPRLAND_KEYBIND_CONFIG_FILE = userOptions.cheatsheet.keybinds.configPath ?
     userOptions.cheatsheet.keybinds.configPath : `${GLib.get_user_config_dir()}/hypr/hyprland/keybinds.conf`;

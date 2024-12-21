@@ -4,12 +4,14 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 const { exec, execAsync } = Utils;
-const { Box, Label, Button, Revealer } = Widget;
+const { Box, EventBox, Icon, Scrollable, Label, Button, Revealer } = Widget;
 
-import { fileExists } from '../.miscutils/files.js';
-import { AnimatedCircProg } from "../.commonwidgets/cairo_circularprogress.js";
-import { showMusicControls } from '../../variables.js';
-import { darkMode, hasPlasmaIntegration } from '../.miscutils/system.js';
+import { fileExists } from '../../.miscutils/files.js';
+import { AnimatedCircProg } from "../../.commonwidgets/cairo_circularprogress.js";
+import { showMusicControls } from '../../../variables.js';
+import { darkMode, hasPlasmaIntegration } from '../../.miscutils/system.js';
+import SidebarModule from './module.js';
+import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
 
 const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`
 const LIGHTDARK_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/colormode.txt`;
@@ -363,7 +365,7 @@ const PlayState = ({ player }) => {
 }
 
 const MusicControlsWidget = (player) => Box({
-    className: 'osd-music spacing-h-20 test',
+    className: 'osd-music spacing-h-20',
     children: [
         CoverArt({ player: player, vpack: 'center' }),
         Box({
@@ -373,13 +375,12 @@ const MusicControlsWidget = (player) => Box({
                 Box({
                     vertical: true,
                     vpack: 'center',
-                    hexpand: true,
+                    hexpand: false,
                     children: [
                         TrackTitle({ player: player }),
                         TrackArtists({ player: player }),
                     ]
                 }),
-                Box({ vexpand: true }),
                 Box({
                     className: 'spacing-h-10',
                     setup: (box) => {
@@ -388,21 +389,46 @@ const MusicControlsWidget = (player) => Box({
                         if(hasPlasmaIntegration || player.busName.startsWith('org.mpris.MediaPlayer2.chromium')) box.pack_end(TrackTime({ player: player }), false, false, 0)
                         // box.pack_end(TrackSource({ vpack: 'center', player: player }), false, false, 0);
                     }
-                })
+                }),
             ]
-        })
+        }),
+        
+    ]
+})
+const NoMusicBox = () => Bow({
+    className: 'osd-music spacing-h-20',
+    children: [
+        Box({
+            vertical: true,
+            className: 'spacing-v-5 osd-music-info',
+            children: [
+                Box({
+                    vertical: true,
+                    vpack: 'center',
+                    hexpand: false,
+                    children: [
+                        TrackTitle({ player: "No music playing" }),
+                        TrackArtists({ player: "Nobody" }),
+                    ]
+                }),
+            ]
+        }),
     ]
 })
 
-export default () => Revealer({
-    transition: 'slide_down',
-    transitionDuration: userOptions.animations.durationLarge,
-    revealChild: false,
+
+export default () => SidebarModule({
+    icon: MaterialIcon('music_note', 'norm'),
+    name: 'Music',
     child: Box({
-        children: Mpris.bind("players")
-            .as(players => players.map((player) => (isRealPlayer(player) ? MusicControlsWidget(player) : null)))
-    }),
-    setup: (self) => self.hook(showMusicControls, (revealer) => {
-        revealer.revealChild = showMusicControls.value;
-    }),
-})
+        vertical: true,
+        hexpand: false,
+        className: 'spacing-v-5',
+        children: [
+            Box({
+                children: Mpris.bind("players")
+                    .as(players => players.map((player) => (isRealPlayer(player) ? MusicControlsWidget(player) : NoMusicBox())))
+            })
+        ],
+    })
+});

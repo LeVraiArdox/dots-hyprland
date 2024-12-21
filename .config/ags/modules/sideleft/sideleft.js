@@ -1,9 +1,7 @@
 const { Gdk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Button, EventBox, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button } = Widget;
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import toolBox from './toolbox.js';
@@ -13,18 +11,19 @@ import { TabContainer } from '../.commonwidgets/tabcontainer.js';
 import { checkKeybind } from '../.widgetutils/keybind.js';
 
 const SIDEBARTABS = {
-    'apis': {
-        name: 'apis',
-        content: apiWidgets,
-        materialIcon: 'api',
-        friendlyName: 'APIs',
-    },
     'tools': {
         name: 'tools',
         content: toolBox,
         materialIcon: 'home_repair_service',
         friendlyName: 'Tools',
     },
+    'apis': {
+        name: 'apis',
+        content: apiWidgets,
+        materialIcon: 'api',
+        friendlyName: 'APIs',
+    },
+
 }
 const CONTENTS = userOptions.sidebar.pages.order.map((tabName) => SIDEBARTABS[tabName])
 

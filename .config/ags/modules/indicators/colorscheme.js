@@ -1,4 +1,4 @@
-const { Gio, GLib } = imports.gi;
+const { GLib } = imports.gi;
 import Variable from 'resource:///com/github/Aylur/ags/variable.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { ConfigToggle, ConfigMulipleSelection } from '../.commonwidgets/configwidgets.js';

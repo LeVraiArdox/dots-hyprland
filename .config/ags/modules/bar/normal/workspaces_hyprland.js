@@ -1,4 +1,4 @@
-const { GLib, Gdk, Gtk } = imports.gi;
+const { Gdk, Gtk } = imports.gi;
 const Lang = imports.lang;
 const Cairo = imports.cairo;
 const Pango = imports.gi.Pango;
@@ -181,7 +181,6 @@ const WorkspaceContents = (count = 10) => {
 export default () => EventBox({
     onScrollUp: () => Hyprland.messageAsync(`dispatch workspace -1`).catch(print),
     onScrollDown: () => Hyprland.messageAsync(`dispatch workspace +1`).catch(print),
-    onMiddleClick: () => toggleWindowOnAllMonitors('osk'),
     onSecondaryClick: () => App.toggleWindow('overview'),
     attribute: {
         clicked: false,

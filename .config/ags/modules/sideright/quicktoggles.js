@@ -9,7 +9,6 @@ const { execAsync, exec } = Utils;
 import { BluetoothIndicator, NetworkIndicator } from '../.commonwidgets/statusicons.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
-import { sidebarOptionsStack } from './sideright.js';
 
 export const ToggleIconWifi = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',

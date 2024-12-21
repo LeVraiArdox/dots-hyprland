@@ -1,4 +1,4 @@
-const { Gio, GLib, Gtk } = imports.gi;
+const { Gio, GLib } = imports.gi;
 
 export function fileExists(filePath) {
     let file = Gio.File.new_for_path(filePath);
