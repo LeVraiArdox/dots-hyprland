@@ -52,17 +52,14 @@
     <h3></h3>
 </div>
 
-![1](https://github.com/user-attachments/assets/980d059d-5584-4527-831f-654d5ebe7e2e)
+![1](https://github.com/user-attachments/assets/ea21cd71-d9d1-42aa-994d-d3edd18f64e3)
 
-- Side pannel with quick toggles, notifications, wifi and bluetooth applets, quick settings, sound settings, calendar and todo list.
+- Adaptative color scheme
+- 
+![2](https://github.com/user-attachments/assets/ce9aee07-000f-4dd7-ac40-ea03f54fbbe8)
 
-![2](https://github.com/user-attachments/assets/f2a5a5f6-1f9a-4fad-93f1-5984425b5fc8)
 
-- Music applet
-
-![3](https://github.com/user-attachments/assets/52724714-c40f-41aa-bd65-4125c8191d44)
-
-- Gemini/ChatGPT integration, quick scripts and tools.
+- Panels with everything you need
 
 
 <div align="center">
@@ -70,4 +67,4 @@
     <h3></h3>
 </div>
 
- - [@end-4](https://github.com/end-4) for making this rice
+ - [@end-4](https://github.com/end-4) for providing the base of this rice
