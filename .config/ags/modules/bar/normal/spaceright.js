@@ -1,10 +1,11 @@
+const { GLib } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import SystemTray from 'resource:///com/github/Aylur/ags/service/systemtray.js';
-const { execAsync } = Utils;
+const { execAsync, exec } = Utils;
 import Indicator from '../../../services/indicator.js';
 import { StatusIcons } from '../../.commonwidgets/statusicons.js';
 import { Tray } from "./tray.js";
@@ -68,28 +69,45 @@ const BarBattery = () => Box({
     ]
 });
 
-const SeparatorDot = () => Widget.Revealer({
-    transition: 'slide_left',
-    revealChild: false,
-    attribute: {
-        'count': SystemTray.items.length,
-        'update': (self, diff) => {
-            self.attribute.count += diff;
-            self.revealChild = (self.attribute.count > 0);
-        }
-    },
-    child: Widget.Box({
-        vpack: 'center',
-        className: 'separator-circle',
-    }),
-    setup: (self) => self
-        .hook(SystemTray, (self) => self.attribute.update(self, 1), 'added')
-        .hook(SystemTray, (self) => self.attribute.update(self, -1), 'removed')
-    ,
-});
+const SeparatorDot = () => {
+    if (!ShowTray()) return;
+    else return Widget.Revealer({
+        transition: 'slide_left',
+        revealChild: false,
+        attribute: {
+            'count': SystemTray.items.length,
+            'update': (self, diff) => {
+                self.attribute.count += diff;
+                self.revealChild = (self.attribute.count > 0);
+            }
+        },
+        child: Widget.Box({
+            vpack: 'center',
+            className: 'separator-circle',
+        }),
+        setup: (self) => self
+            .hook(SystemTray, (self) => self.attribute.update(self, 1), 'added')
+            .hook(SystemTray, (self) => self.attribute.update(self, -1), 'removed')
+        ,
+    });
+}
+
+const ShowTray = () => {
+    const SYSTRAY_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_systray.txt`;
+    const actual_show_systray = exec(`bash -c "cat ${SYSTRAY_FILE_LOCATION}"`);
+    return actual_show_systray == 'true' ? true : false;
+}
+
+const ShowSysIcons = () => {
+    const SYSICONS_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_sysicon.txt`;
+    const actual_show_sysicons = exec(`bash -c "cat ${SYSICONS_FILE_LOCATION}"`);
+    return actual_show_sysicons == 'true' ? true : false;
+}
+
 
 export default (monitor = 0) => {
-    const barTray = Tray();
+    let barTray = Tray();
+    if (!ShowTray()) barTray = Widget.Box({ hexpand: true, });
     const barStatusIcons = StatusIcons({
         className: 'bar-statusicons',
         setup: (self) => self.hook(App, (self, currentName, visible) => {
@@ -111,7 +129,7 @@ export default (monitor = 0) => {
         child: child,
     });
     const emptyArea = SpaceRightDefaultClicks(Widget.Box({ hexpand: true, }));
-    const indicatorArea = SpaceRightDefaultClicks(Widget.Box({
+    let indicatorArea = SpaceRightDefaultClicks(Widget.Box({
         children: [
             SeparatorDot(),
             Revealer({
@@ -126,6 +144,7 @@ export default (monitor = 0) => {
             barStatusIcons
         ],
     }));
+    if (!ShowSysIcons()) indicatorArea = null;
     const actualContent = Widget.Box({
         hexpand: true,
         className: 'spacing-h-5 bar-spaceright',

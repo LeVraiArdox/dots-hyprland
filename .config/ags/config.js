@@ -17,6 +17,7 @@ import SideLeft from './modules/sideleft/main.js';
 import SideRight from './modules/sideright/main.js';
 import { COMPILED_STYLE_DIR } from './init.js';
 
+
 const range = (length, start = 1) => Array.from({ length }, (_, i) => i + start);
 function forMonitors(widget) {
     const n = Gdk.Display.get_default()?.get_n_monitors() || 1;

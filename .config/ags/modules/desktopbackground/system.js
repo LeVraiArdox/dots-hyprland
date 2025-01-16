@@ -1,3 +1,4 @@
+const { GLib } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { execAsync, exec } = Utils;
@@ -114,9 +115,17 @@ const distroAndVersion = Box({
     ]
 })
 
+const getBarPosition = () => {
+    const BARPOS_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/bar_position.txt`;
+    const actualPos = exec(`bash -c "cat ${BARPOS_FILE_LOCATION}"`);
+    const currentVpack = actualPos == 'top' ? 'end' : 'start';
+    return currentVpack;
+}
+
+
 export default () => Box({
     hpack: 'end',
-    vpack: 'end',
+    vpack: getBarPosition(),
     children: [
         EventBox({
             child: Box({
@@ -125,8 +134,8 @@ export default () => Box({
                 className: 'bg-distro-box spacing-v-20',
                 vertical: true,
                 children: [
-                    resources,
                     distroAndVersion,
+                    resources,
                 ]
             }),
             onPrimaryClickRelease: () => {
@@ -141,6 +150,3 @@ export default () => Box({
         })
     ],
 })
-
-
-

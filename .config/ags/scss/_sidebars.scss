@@ -936,3 +936,16 @@ $skeleton-accent: mix($secondary, $onSecondary, 50%);
     font-size: large;
     padding: 0.341rem;
 }
+
+.config-center-save-button {
+    @include full-rounding;
+    @include element_decel;
+    min-height: 2.25rem;
+    background-color: $primary;
+    color: $onPrimary;
+    margin-top: 1rem;
+}
+.config-center-save-button:hover {
+    background-color: $primaryContainer;
+    color: $onPrimaryContainer;
+}

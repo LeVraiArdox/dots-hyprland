@@ -2,7 +2,7 @@ const { GLib } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
-const { execAsync } = Utils;
+const { exec, execAsync } = Utils;
 const { Box, Label, Button } = Widget;
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import { quickLaunchItems } from './data_quicklaunches.js'
@@ -58,9 +58,16 @@ const QuickLaunches = () => Box({
     ]
 })
 
+const getBarPosition = () => {
+    const BARPOS_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/bar_position.txt`;
+    const actualPos = exec(`bash -c "cat ${BARPOS_FILE_LOCATION}"`);
+    const currentVpack = actualPos == 'top' ? 'end' : 'start';
+    return currentVpack;
+}
+
 export default () => Box({
     hpack: 'start',
-    vpack: 'end',
+    vpack: getBarPosition(),
     vertical: true,
     className: 'bg-time-box spacing-h--10',
     children: [

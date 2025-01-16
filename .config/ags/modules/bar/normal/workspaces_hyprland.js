@@ -8,6 +8,7 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 const { Box, DrawingArea, EventBox } = Widget;
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import { MaterialIcon } from "../../.commonwidgets/materialicon.js";
 
 const dummyWs = Box({ className: 'bar-ws' }); // Not shown. Only for getting size props
 const dummyActiveWs = Box({ className: 'bar-ws bar-ws-active' }); // Not shown. Only for getting size props
@@ -165,7 +166,12 @@ const WorkspaceContents = (count = 10) => {
                     else
                         cr.setSourceRGBA(inactivecolors.red, inactivecolors.green, inactivecolors.blue, inactivecolors.alpha);
 
-                    layout.set_text(`${i + offset}`, -1);
+                    
+                    const icon = Widget.Label({
+                        className: 'icon-material',
+                        label: "\ue57b",
+                    });
+                    layout.set_text(icon.label, -1); // Workspace number print
                     const [layoutWidth, layoutHeight] = layout.get_pixel_size();
                     const x = -workspaceRadius + (workspaceDiameter * i) - (layoutWidth / 2);
                     const y = (height - layoutHeight) / 2;

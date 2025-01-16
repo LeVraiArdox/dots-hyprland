@@ -1,7 +1,10 @@
+const { GLib } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Brightness from '../../../services/brightness.js';
 import Indicator from '../../../services/indicator.js';
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+const { exec } = Utils;
 
 const WindowTitle = async () => {
     try {
@@ -38,9 +41,17 @@ const WindowTitle = async () => {
     }
 }
 
+const ShowWindowTitle = () => {
+    const WINTITLE_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_wintitle.txt`;
+    const actual_show_wintitle = exec(`bash -c "cat ${WINTITLE_FILE_LOCATION}"`);
+    return actual_show_wintitle == 'true' ? true : false;
+}
 
 export default async (monitor = 0) => {
-    const optionalWindowTitleInstance = await WindowTitle();
+    let optionalWindowTitleInstance = await WindowTitle();
+    if (!ShowWindowTitle()) optionalWindowTitleInstance = null;
+
+    
     return Widget.EventBox({
         onScrollUp: () => {
             Indicator.popup(1); // Since the brightness and speaker are both on the same window

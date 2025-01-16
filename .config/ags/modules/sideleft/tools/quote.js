@@ -6,10 +6,10 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 
 const MakeRequest = async () => {
     try {
-        const response = await Utils.fetch("http://api.quotable.io/random");
+        const response = await Utils.fetch("https://quotes-api-self.vercel.app/quote");
         const data = await response.json();
         return {
-            quote: data.content, 
+            quote: data.quote, 
             author: data.author
         };
     } catch (error) {

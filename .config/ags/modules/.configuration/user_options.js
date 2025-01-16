@@ -29,6 +29,7 @@ let configOptions = {
     keyboardUseFlag: false, // Use flag emoji instead of abbreviation letters
     layerSmoke: false,
     layerSmokeStrength: 0.2,
+    barPosition: "top", // Either "top" or "bottom"
   },
   apps: {
     bluetooth: "blueberry",

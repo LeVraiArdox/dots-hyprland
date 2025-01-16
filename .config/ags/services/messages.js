@@ -56,5 +56,16 @@ export async function firstRunWelcome() {
                 Utils.execAsync(['bash', '-c', `sh ${GLib.get_user_config_dir()}/ags/scripts/color_generation/switchwall.sh --path /usr/share/backgrounds/aesthetic_deer.jpg`, '&']).catch(print);
             })
             .catch(print);
+        // Create files
+        Utils.exec(`bash -c 'echo "top" > ${GLib.get_user_state_dir()}/ags/user/bar_position.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_monitor.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_timedate.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_wintitle.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_workspaces.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_systray.txt'`);
+        Utils.exec(`bash -c 'echo "true" > ${GLib.get_user_state_dir()}/ags/user/show_sysicon.txt'`);
+        Utils.exec(`bash -c 'echo "false" > ${GLib.get_user_state_dir()}/ags/user/show_weather.txt'`);
+        Utils.exec(`bash -c 'echo "false" > ${GLib.get_user_state_dir()}/ags/user/show_music.txt'`);
+        
     }
 }

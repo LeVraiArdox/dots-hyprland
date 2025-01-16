@@ -122,7 +122,7 @@ const BarResourceTemp = (
             .then((output) => {
               resourceCircProg.css = `font-size: ${Number(output)}px;`;
               resourceLabel.label = `${Math.round(Number(output))}°C`;
-              widget.tooltipText = `${name}: ${Math.round(Number(output))}%`;
+              widget.tooltipText = `${name}: ${Math.round(Number(output))}°C`;
             })
             .catch(print)
         ),
@@ -145,6 +145,12 @@ const switchToRelativeWorkspace = async (self, num) => {
       `${num}`,
     ]).catch(print);
   }
+};
+
+const showBarRessources = () => {
+  const SHOWMON_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_monitor.txt`;
+  const actual_show_monitor = exec(`bash -c "cat ${SHOWMON_FILE_LOCATION}"`);
+  return actual_show_monitor == 'true' ? true : false;
 };
 
 export default () => {
@@ -230,7 +236,8 @@ export default () => {
         }),
       });
   };
-  return EventBox({
+  if (!showBarRessources()) return null;
+  else return EventBox({
     onScrollUp: (self) => switchToRelativeWorkspace(self, -1),
     onScrollDown: (self) => switchToRelativeWorkspace(self, +1),
     child: Box({

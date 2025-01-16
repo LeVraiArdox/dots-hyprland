@@ -1,9 +1,75 @@
 const { GLib } = imports.gi;
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
-const { Box, Label, Scrollable } = Widget;
+const { Box, Label, Scrollable, Button } = Widget;
 const { execAsync, exec } = Utils;
 import { ConfigGap, ConfigSpinButton, ConfigToggle } from '../../.commonwidgets/configwidgets.js';
+import { setupCursorHover } from '../../.widgetutils/cursorhover.js';
+import { MaterialIcon } from '../../.commonwidgets/materialicon.js';
+
+
+const BARPOS_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/bar_position.txt`;
+const actual_bar_position = exec(`bash -c "cat ${BARPOS_FILE_LOCATION}"`);
+if (actual_bar_position == null) {
+    execAsync(['bash', '-c', `echo "top" > ${BARPOS_FILE_LOCATION}`]).catch(print);
+    actual_bar_position = exec(`bash -c "cat ${BARPOS_FILE_LOCATION}"`);
+}
+
+const SHOWMON_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_monitor.txt`;
+const actual_show_monitor = exec(`bash -c "cat ${SHOWMON_FILE_LOCATION}"`);
+if (actual_show_monitor == null) {
+    execAsync(['bash', '-c', `echo "true" > ${SHOWMON_FILE_LOCATION}`]).catch(print);
+    actual_show_monitor = exec(`bash -c "cat ${SHOWMON_FILE_LOCATION}"`);
+}
+
+const TIMEDATE_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_timedate.txt`;
+const actual_show_timedate = exec(`bash -c "cat ${TIMEDATE_FILE_LOCATION}"`);
+if (actual_show_timedate == null) {
+    execAsync(['bash', '-c', `echo "true" > ${TIMEDATE_FILE_LOCATION}`]).catch(print);
+    actual_show_timedate = exec(`bash -c "cat ${TIMEDATE_FILE_LOCATION}"`);
+}
+
+const WINTITLE_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_wintitle.txt`;
+const actual_show_wintitle = exec(`bash -c "cat ${WINTITLE_FILE_LOCATION}"`);
+if (actual_show_wintitle == null) {
+    execAsync(['bash', '-c', `echo "true" > ${WINTITLE_FILE_LOCATION}`]).catch(print);
+    actual_show_wintitle = exec(`bash -c "cat ${WINTITLE_FILE_LOCATION}"`);
+}
+
+const WORKSPACE_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_workspaces.txt`;
+const actual_show_workspaces = exec(`bash -c "cat ${WORKSPACE_FILE_LOCATION}"`);
+if (actual_show_workspaces == null) {
+    execAsync(['bash', '-c', `echo "true" > ${WORKSPACE_FILE_LOCATION}`]).catch(print);
+    actual_show_workspaces = exec(`bash -c "cat ${WORKSPACE_FILE_LOCATION}"`);
+}
+
+const SYSTRAY_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_systray.txt`;
+const actual_show_systray = exec(`bash -c "cat ${SYSTRAY_FILE_LOCATION}"`);
+if (actual_show_systray == null) {
+    execAsync(['bash', '-c', `echo "true" > ${SYSTRAY_FILE_LOCATION}`]).catch(print);
+    actual_show_systray = exec(`bash -c "cat ${SYSTRAY_FILE_LOCATION}"`);
+}
+
+const SYSICON_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_sysicon.txt`;
+const actual_show_sysicon = exec(`bash -c "cat ${SYSICON_FILE_LOCATION}"`);
+if (actual_show_sysicon == null) {
+    execAsync(['bash', '-c', `echo "true" > ${SYSICON_FILE_LOCATION}`]).catch(print);
+    actual_show_sysicon = exec(`bash -c "cat ${SYSICON_FILE_LOCATION}"`);
+}
+
+const WEATHER_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_weather.txt`;
+const actual_show_weather = exec(`bash -c "cat ${WEATHER_FILE_LOCATION}"`);
+if (actual_show_weather == null) {
+    execAsync(['bash', '-c', `echo "true" > ${WEATHER_FILE_LOCATION}`]).catch(print);
+    actual_show_weather = exec(`bash -c "cat ${WEATHER_FILE_LOCATION}"`);
+}
+
+const MUSIC_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/show_music.txt`;
+const actual_show_music = exec(`bash -c "cat ${MUSIC_FILE_LOCATION}"`);
+if (actual_show_music == null) {
+    execAsync(['bash', '-c', `echo "true" > ${MUSIC_FILE_LOCATION}`]).catch(print);
+    actual_show_music = exec(`bash -c "cat ${MUSIC_FILE_LOCATION}"`);
+}
 
 const HyprlandToggle = ({ icon, name, desc = null, option, enableValue = 1, disableValue = 0, extraOnChange = () => { } }) => ConfigToggle({
     icon: icon,
@@ -16,6 +82,39 @@ const HyprlandToggle = ({ icon, name, desc = null, option, enableValue = 1, disa
     }
 });
 
+const createToggle = (fileLocation, actualValue, execCommand, icon, name, desc, extraOnChange = () => { }) => ConfigToggle({
+    icon: icon,
+    name: name,
+    desc: desc,
+    initValue: actualValue === 'true',
+    onChange: (self, newValue) => {
+        const newValueStr = actualValue === 'true' ? 'false' : 'true';
+        execAsync(['bash', '-c', `echo "${newValueStr}" > ${fileLocation}`]).catch(print);
+        extraOnChange(self, newValue);
+    }
+});
+
+const CustomBarToggle = ({ icon, name, desc = null, extraOnChange = () => { } }) => ConfigToggle({
+    icon: icon,
+    name: name,
+    desc: desc,
+    initValue: userOptions.appearance.barPosition,
+    onChange: (self, newValue) => {
+        const newPos = actual_bar_position === 'top' ? 'bottom' : 'top';
+        execAsync(['bash', '-c', `echo "${newPos}" > ${BARPOS_FILE_LOCATION}`]).catch(print);
+        extraOnChange(self, newValue);
+    }
+});
+
+const ShowMonitorToggle = (props) => createToggle(SHOWMON_FILE_LOCATION, actual_show_monitor, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowTimeDate = (props) => createToggle(TIMEDATE_FILE_LOCATION, actual_show_timedate, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowWinTitle = (props) => createToggle(WINTITLE_FILE_LOCATION, actual_show_wintitle, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowWorkspaces = (props) => createToggle(WORKSPACE_FILE_LOCATION, actual_show_workspaces, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowSystray = (props) => createToggle(SYSTRAY_FILE_LOCATION, actual_show_systray, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowSysicon = (props) => createToggle(SYSICON_FILE_LOCATION, actual_show_sysicon, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowWeather = (props) => createToggle(WEATHER_FILE_LOCATION, actual_show_weather, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+const ShowMusic = (props) => createToggle(MUSIC_FILE_LOCATION, actual_show_music, 'pkill ags && ags', props.icon, props.name, props.desc, props.extraOnChange);
+
 const HyprlandSpinButton = ({ icon, name, desc = null, option, ...rest }) => ConfigSpinButton({
     icon: icon,
     name: name,
@@ -25,6 +124,16 @@ const HyprlandSpinButton = ({ icon, name, desc = null, option, ...rest }) => Con
         execAsync(['hyprctl', 'keyword', option, `${newValue}`]).catch(print);
     },
     ...rest,
+});
+
+const saveButton = Button({
+        vpack: 'center',
+        className: 'config-center-save-button',
+        child: MaterialIcon('save', 'norm'),
+        label: 'Save',
+        tooltipText: 'Save',
+        setup: setupCursorHover,
+        onClicked: () => execAsync(['bash', '-c', 'pkill ags && ags']).catch(print),
 });
 
 const Subcategory = (children) => Box({
@@ -102,6 +211,20 @@ export default (props) => {
                         HyprlandToggle({ icon: 'sort', name: 'Log to stdout', desc: "[Hyprland]\nPrint LOG, ERR, WARN, etc. messages to the console", option: "debug:enable_stdout_logs" }),
                         HyprlandToggle({ icon: 'motion_sensor_active', name: 'Damage tracking', desc: "[Hyprland]\nEnable damage tracking\nGenerally, leave it on.\nTurn off only when a shader doesn't work", option: "debug:damage_tracking", enableValue: 2 }),
                         HyprlandToggle({ icon: 'destruction', name: 'Damage blink', desc: "[Hyprland] [Epilepsy warning!]\nShow screen damage flashes", option: "debug:damage_blink" }),
+                    ]
+                }),
+                ConfigSection({
+                    name: 'Customization', children: [
+                        CustomBarToggle({ icon: 'palette', name: 'Bar position', desc: 'Change the bar position'}),
+                        ShowMonitorToggle({ icon: 'memory_alt', name: 'Show system ressource indicators', desc: 'Show the system ressource indicators on the bar'}),
+                        ShowTimeDate({ icon: 'schedule', name: 'Show time and date', desc: 'Show the time and date on the bar'}),
+                        ShowWinTitle({ icon: 'title', name: 'Show window title', desc: 'Show the window title on the bar'}),
+                        ShowWorkspaces({ icon: 'view_module', name: 'Show workspaces', desc: 'Show the workspaces on the bar'}),
+                        ShowSystray({ icon: 'settings_input_hdmi', name: 'Show system tray', desc: 'Show the app trays on the bar'}),
+                        ShowSysicon({ icon: 'settings', name: 'Show system icons', desc: 'Show the system icons on the bar'}),
+                        ShowWeather({ icon: 'cloud', name: 'Show weather', desc: 'Show the weather on the bar'}),
+                        ShowMusic({ icon: 'music_note', name: 'Show music', desc: 'Show the music on the bar'}),
+                        saveButton,
                     ]
                 }),
             ]
