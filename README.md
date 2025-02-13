@@ -1,3 +1,8 @@
+# IMPORTANT!!!!
+This repository is now unmaintained as this rice is now a AxOS desktop environement: [axos-project/sleex](https://github.com/AxOS-project/Sleex)
+
+
+
 <div align="center">
     <h1>【 Ardox's Hyprland dotfiles 】</h1>
     <p>Based on <a href="https://github.com/end-4/dots-hyprland.git">end-4's dotfiles</a>.</p>
